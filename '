@@ -113,28 +113,31 @@ void fill_rand(vector<int>& arr, int low, int high) {
 }
 
 int get_pivot(vector<int>& arr, int left, int right) {
-  return right;
+  return arr[right];
 }
 
 void quick_sort(vector<int>& arr, int left, int right) {
   if (left >= right) {
     return;
   }
+  //print_vector(arr, left, right);
 
   int pivot = get_pivot(arr, left, right);
-  swap(arr[right], arr[pivot]);
   int p0 = left;
   int p1 = right - 1;
   while (p0 <= p1) {
-    if (arr[p0] <= arr[pivot]) {
+    if (arr[p0] <= pivot) {
       p0++;
-    } else if (arr[p1] >= arr[pivot]) {
+    } else if (arr[p1] >= pivot) {
       p1--;
     } else {
       swap(arr[p0], arr[p1]);
     }
   }
+  //print_vector(arr, left, right);
+  //cout << p0 << " " << right << endl;
   swap(arr[p0], arr[right]);
+  //print_vector(arr, left, right);
   quick_sort(arr, left, p0 - 1);
   quick_sort(arr, p0 + 1, right);
 }
@@ -146,7 +149,7 @@ void quick_sort(vector<int>& arr) {
 
 int main() {
   vector<int> arr(40, -1);
-  fill_rand(arr, 11, 40);
+  fill_rand(arr, 11, 30);
   cout << "original:" << endl;
   print_vector(arr);
   cout << "sorted:" << endl;
